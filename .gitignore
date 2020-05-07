@@ -1,6 +1,8 @@
 .vscode
 __pycache__
-venv
+keystore.py
+# python venv name
+trivia-project-fsnd
 
 # OS generated files #
 ######################

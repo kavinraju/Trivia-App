@@ -3,8 +3,13 @@ from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
+""" keystore consists of all the passwords required for the backend """
+from keystore import database_password
+
 database_name = "trivia"
-database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+username = "postgres"
+password = database_password
+database_path = "postgres://{}:{}@{}/{}".format(username, password, 'localhost:5432', database_name)
 
 db = SQLAlchemy()
 

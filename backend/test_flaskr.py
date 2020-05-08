@@ -190,7 +190,7 @@ class TriviaTestCase(unittest.TestCase):
         """
         searchTerm = 'who'
         len_of_seachTerm = 3
-        
+
         res = self.client().post('/questions', json={'searchTerm': searchTerm})
         data = json.loads(res.data)
         
@@ -222,6 +222,21 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(data['total_questions'], 0)
         self.assertEqual(len(data['questions']), 0)
+
+    
+    """ Test for the endpoint 
+    GET '/categories/<int:category_id>/questions`
+    """
+    ## TEST 10 ##
+    # Success Test
+    def test_get_paginated_questions_based_on_category(self):
+        category_id = 1
+        res = self.client().get('/categories/{}/questions'.format(category_id))
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(len(data['questions']))
+        self.assertTrue(data['total_questions'])
 
 
 

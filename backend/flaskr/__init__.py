@@ -139,7 +139,7 @@ def create_app(test_config=None):
 
   
   '''
-  @TODO: 
+  @TODO: Done
   Create an endpoint to POST a new question, 
   which will require the question and answer text, 
   category, and difficulty score.
@@ -197,7 +197,7 @@ def create_app(test_config=None):
 
 
   '''
-  @TODO: 
+  @TODO: Done
   Create a POST endpoint to get questions based on a search term. 
   It should return any questions for whom the search term 
   is a substring of the question. 

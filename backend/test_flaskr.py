@@ -225,8 +225,9 @@ class TriviaTestCase(unittest.TestCase):
 
     
     """ Test for the endpoint 
-    GET '/categories/<int:category_id>/questions`
+    GET '/categories/<int:category_id>/questions'
     """
+
     ## TEST 10 ##
     # Success Test
     def test_get_paginated_questions_based_on_category(self):
@@ -238,6 +239,16 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(len(data['questions']))
         self.assertTrue(data['total_questions'])
 
+    ## TEST 11 ##
+    # Error Test
+    def test_404_if_get_paginated_questions_based_on_category_not_available(self):
+        category_id = 1005341
+        res = self.client().get('/categories/{}/questions'.format(category_id))
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], ERROR_404_MESSAGE)
 
 
 # Make the tests conveniently executable

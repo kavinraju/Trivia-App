@@ -34,10 +34,16 @@ def create_app(test_config=None):
   '''
   @app.route('/categories', methods=['GET'])
   def retrive_questions():
-    selection = Category.query.all()
-    categories = [category.format() for category in selection]
+    selection = Question.query.all()
+    questions = [question.format() for question in selection]
     return jsonify({
-      'categories': categories
+      'questions': questions
+    })
+
+  @app.route('/')
+  def index():
+    return jsonify({
+      'message':'hi'
     })
 
   '''

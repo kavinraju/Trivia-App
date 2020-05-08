@@ -7,6 +7,10 @@ import random
 from models import setup_db, Question, Category
 
 QUESTIONS_PER_PAGE = 10
+ERROR_400_MESSAGE = "Bad request"
+ERROR_404_MESSAGE = "Resource not found"
+ERROR_405_MESSAGE = "Method not found"
+ERROR_422_MESSAGE = "Uprocessable"
 
 def create_app(test_config=None):
   # create and configure the app
@@ -15,11 +19,12 @@ def create_app(test_config=None):
   
   '''
   @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
+  DONE
   '''
   cors = CORS(app, resources ={r"/": {"origins":"*"}})
 
   '''
-  @TODO: Use the after_request decorator to set Access-Control-Allow
+  @TODO: Use the after_request decorator to set Access-Control-Allow. DONE
   '''
   @app.after_request
   def after_request(response):
@@ -28,27 +33,28 @@ def create_app(test_config=None):
     return response
 
   '''
-  @TODO: 
+  @TODO: DONE
   Create an endpoint to handle GET requests 
   for all available categories.
   '''
-  @app.route('/categories', methods=['GET'])
-  def retrive_questions():
-    selection = Question.query.all()
-    questions = [question.format() for question in selection]
-    return jsonify({
-      'questions': questions,
-      'total_qustions': len(questions)
-    })
 
-  @app.route('/')
-  def index():
-    return jsonify({
-      'message':'hi'
-    })
+  @app.route('/categories', methods=['GET'])
+  def retrive_categories():
+
+    selection = Category.query.order_by(Category.type).all()
+    categories = [category.format() for category in selection]
+
+    if categories is None or len(categories) == 0:
+      abort(404)
+    else:
+      return jsonify({
+        'success': True,
+        'categories': categories,
+        'total_categories': len(categories)
+      })
 
   '''
-  @TODO: 
+  @TODO: DONE
   Create an endpoint to handle GET requests for questions, 
   including pagination (every 10 questions). 
   This endpoint should return a list of questions, 
@@ -59,6 +65,38 @@ def create_app(test_config=None):
   ten questions per page and pagination at the bottom of the screen for three pages.
   Clicking on the page numbers should update the questions. 
   '''
+
+  ''' Helper Method for pagination. '''
+
+  def paginate_questions(request, selection):
+    page = request.args.get('page', 1, type=int)
+    start = (page-1) * QUESTIONS_PER_PAGE
+    end = start + QUESTIONS_PER_PAGE
+
+    questions = [question.format() for question in selection]
+    current_questions = questions[start:end]
+
+    return current_questions
+
+  @app.route('/questions', methods=['GET'])
+  def retrive_questions():
+
+    selection = Question.query.order_by(Question.id).all()
+    current_questions = paginate_questions(request, selection)
+
+    if current_questions is None or len(current_questions) == 0:
+      abort(404)
+    else:
+      categories_selction = Category.query.order_by(Category.type).all()
+      categories = [category.format() for category in categories_selction]
+
+      return jsonify({
+        'success': True,
+        'questions': current_questions,
+        'total_questions': len(selection),
+        'current_category': None,
+        'categories': categories
+      })
 
   '''
   @TODO: 
@@ -117,6 +155,15 @@ def create_app(test_config=None):
   Create error handlers for all expected errors 
   including 404 and 422. 
   '''
+
+  @app.errorhandler(404)
+  def resource_not_found(error):
+    return jsonify({
+      'success': False,
+      'error': 404,
+      'message': ERROR_404_MESSAGE,
+      'error_message': str(error)
+    }), 404
   
   return app
 

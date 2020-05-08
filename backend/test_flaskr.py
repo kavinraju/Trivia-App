@@ -88,7 +88,7 @@ class TriviaTestCase(unittest.TestCase):
     ## TEST 3 ##
     # Error Test
     def test_404_sent_request_beyond_valid_page(self):
-        res = self.client().get('/questions/10000')
+        res = self.client().get('/questions?page=10000')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)

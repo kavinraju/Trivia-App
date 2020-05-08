@@ -32,6 +32,7 @@ def create_app(test_config=None):
     response.headers.add('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS')
     return response
 
+
   '''
   @TODO: DONE
   Create an endpoint to handle GET requests 
@@ -52,6 +53,7 @@ def create_app(test_config=None):
         'categories': categories,
         'total_categories': len(categories)
       })
+
 
   '''
   @TODO: DONE
@@ -98,13 +100,15 @@ def create_app(test_config=None):
         'categories': categories
       })
 
+  
   '''
-  @TODO: 
+  @TODO: DONE
   Create an endpoint to DELETE question using a question ID. 
 
   TEST: When you click the trash icon next to a question, the question will be removed.
   This removal will persist in the database and when you refresh the page. 
   '''
+
   @app.route('/questions/<int:question_id>', methods=['DELETE'])
   def delete_question(question_id):
     try:
@@ -130,10 +134,10 @@ def create_app(test_config=None):
         'categories': categories
       })
 
-    except Exception as e:
-      print("ERROR: ", str(e))
+    except:
       abort(422) # Unprocessable Entity
 
+  
   '''
   @TODO: 
   Create an endpoint to POST a new question, 
@@ -144,6 +148,41 @@ def create_app(test_config=None):
   the form will clear and the question will appear at the end of the last page
   of the questions list in the "List" tab.  
   '''
+
+  @app.route('/questions', methods=['POST'])
+  def create_question():
+    body = request.get_json()
+    
+    if body is None:
+      abort(422) # Unprocessable Entity
+    else:
+      new_question = body.get('question', None)
+      new_answer = body.get('answer', None)
+      new_category = body.get('category', None)
+      new_difficulty_score = body.get('difficulty', None)
+
+      try:
+        question = Question(new_question, new_answer, new_category, new_difficulty_score)
+        question.insert()
+
+        questions_selection = Question.query.order_by(Question.id).all()
+        current_questions = paginate_questions(request, questions_selection)
+
+        categories_selction = Category.query.order_by(Category.type).all()
+        categories = [category.format() for category in categories_selction]
+
+        return jsonify({
+          'success': True,
+          'created': question.id,
+          'questions': current_questions,
+          'total_questions': len(questions_selection),
+          'current_category': question.category,
+          'categories': categories
+        })
+        
+      except:
+        abort(422) # Unprocessable Entity
+
 
   '''
   @TODO: 
@@ -201,6 +240,15 @@ def create_app(test_config=None):
       'message': ERROR_422_MESSAGE,
       'error_message': str(error)
     }), 422
+
+  @app.errorhandler(405)
+  def method_not_allowed(error):
+    return jsonify({
+      'success': False,
+      'error': 405,
+      'message': ERROR_405_MESSAGE,
+      'error_message': str(error)
+    }), 405
   
   return app
 

@@ -30,6 +30,13 @@ class TriviaTestCase(unittest.TestCase):
         self.database_path = database_path
         setup_db(self.app, self.database_path)
 
+        self.new_question = {
+            'question': 'La Giaconda is better known as what?',
+            'answer': 'Mona Lisa',
+            'category': 2,
+            'difficulty': 3
+        }
+
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
@@ -105,22 +112,22 @@ class TriviaTestCase(unittest.TestCase):
     
     ## TEST 4 ##
     # Success Test
-    def test_delete_question(self):
+    # def test_delete_question(self):
         
-        # Update the Question number to be deleted
-        question_id = 17
+    #     # Update the Question number to be deleted
+    #     question_id = 17
 
-        res = self.client().delete('/questions/' + str(question_id))
-        data = json.loads(res.data)
-        question = Question.query.filter(Question.id == question_id).one_or_none()
+    #     res = self.client().delete('/questions/' + str(question_id))
+    #     data = json.loads(res.data)
+    #     question = Question.query.filter(Question.id == question_id).one_or_none()
 
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['success'], True)
-        self.assertEqual(question, None)
-        self.assertEqual(data['deleted'], question_id)
-        self.assertTrue(data['total_questions'])
-        self.assertTrue(len(data['questions']))
-        self.assertTrue(len(data['categories']))
+    #     self.assertEqual(res.status_code, 200)
+    #     self.assertEqual(data['success'], True)
+    #     self.assertEqual(question, None)
+    #     self.assertEqual(data['deleted'], question_id)
+    #     self.assertTrue(data['total_questions'])
+    #     self.assertTrue(len(data['questions']))
+    #     self.assertTrue(len(data['categories']))
 
     ## TEST 5 ##
     # Error Test
@@ -135,6 +142,32 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 422) 
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], ERROR_422_MESSAGE)
+
+
+    """ Test for the endpoint 
+    POST '/questions'
+    """
+    ## TEST 6 ##
+    # Success Test
+    def test_create_question(self):
+        res = self.client().post('/questions', json=self.new_question)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['created'])
+        self.assertTrue(data['total_questions'])
+        self.assertTrue(len(data['questions']))
+        self.assertTrue(len(data['categories']))
+
+    # Error Test
+    def test_405_if_question_creation_not_allowed(self):
+        res = self.client().post('/questions/1000', json=self.new_question)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 405)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], ERROR_405_MESSAGE)
 
 # Make the tests conveniently executable
 if __name__ == "__main__":

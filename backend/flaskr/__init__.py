@@ -37,7 +37,8 @@ def create_app(test_config=None):
     selection = Question.query.all()
     questions = [question.format() for question in selection]
     return jsonify({
-      'questions': questions
+      'questions': questions,
+      'total_qustions': len(questions)
     })
 
   @app.route('/')

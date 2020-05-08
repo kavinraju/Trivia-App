@@ -146,9 +146,10 @@ def create_app(test_config=None):
 
   TEST: When you submit a question on the "Add" tab, 
   the form will clear and the question will appear at the end of the last page
-  of the questions list in the "List" tab.  
+  of the questions list in the "List" tab.
   '''
 
+  # Endpoint [POST] to get questions based on a Search Term is also included in the same method -  create_question()
   @app.route('/questions', methods=['POST'])
   def create_question():
     body = request.get_json()
@@ -160,26 +161,37 @@ def create_app(test_config=None):
       new_answer = body.get('answer', None)
       new_category = body.get('category', None)
       new_difficulty_score = body.get('difficulty', None)
+      search = body.get('searchTerm', None)
 
       try:
-        question = Question(new_question, new_answer, new_category, new_difficulty_score)
-        question.insert()
+        if search:
+          questions_selection = Question.query.order_by(Question.id).filter(Question.question.ilike('%{}%'.format(search))).all()
+          current_questions = paginate_questions(request, questions_selection)
 
-        questions_selection = Question.query.order_by(Question.id).all()
-        current_questions = paginate_questions(request, questions_selection)
+          return jsonify({
+            'success': True,
+            'questions': current_questions,
+            'total_questions': len(questions_selection),
+            'current_category': None
+          })
+        else:
+          question = Question(new_question, new_answer, new_category, new_difficulty_score)
+          question.insert()
 
-        categories_selction = Category.query.order_by(Category.type).all()
-        categories = [category.format() for category in categories_selction]
+          questions_selection = Question.query.order_by(Question.id).all()
+          current_questions = paginate_questions(request, questions_selection)
 
-        return jsonify({
-          'success': True,
-          'created': question.id,
-          'questions': current_questions,
-          'total_questions': len(questions_selection),
-          'current_category': question.category,
-          'categories': categories
-        })
-        
+          categories_selction = Category.query.order_by(Category.type).all()
+          categories = [category.format() for category in categories_selction]
+
+          return jsonify({
+            'success': True,
+            'created': question.id,
+            'questions': current_questions,
+            'total_questions': len(questions_selection),
+            'current_category': question.category,
+            'categories': categories
+          })
       except:
         abort(422) # Unprocessable Entity
 
@@ -194,6 +206,8 @@ def create_app(test_config=None):
   only question that include that string within their question. 
   Try using the word "title" to start. 
   '''
+  # Endpoint [POST] to get questions based on a Search Term is also included in the above method -  create_question()
+
 
   '''
   @TODO: 

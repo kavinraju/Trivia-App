@@ -160,6 +160,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(len(data['questions']))
         self.assertTrue(len(data['categories']))
 
+    ## TEST 7 ##
     # Error Test
     def test_405_if_question_creation_not_allowed(self):
         res = self.client().post('/questions/1000', json=self.new_question)
@@ -168,6 +169,61 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 405)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], ERROR_405_MESSAGE)
+
+
+    """ Test for the endpoint to get questions based on a search term 
+    POST '/questions'
+    """
+
+    ## TEST 8 ##
+    # Success Test
+    def test_search_question_with_results(self):
+
+        """ Please feel free to change the below data about Search term.
+
+        searchTerm is set to 'who' & len_of_seachTerm is set to 3 during the testing of this 
+        project, change it according to your Database in your system.
+        
+        Precaution:
+            Even this success test may fail if is there any change in data in your database.
+
+        """
+        searchTerm = 'who'
+        len_of_seachTerm = 3
+        
+        res = self.client().post('/questions', json={'searchTerm': searchTerm})
+        data = json.loads(res.data)
+        
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['total_questions'])
+        self.assertTrue(len(data['questions']))
+        self.assertEqual(len(data['questions']), len_of_seachTerm)
+
+    ## TEST 9 ##
+    # Success Test
+    def test_search_question_without_results(self):
+
+        """ Please feel free to change the below data about Search term.
+
+        searchTerm is set to 'abcd' during the testing of this 
+        project, change it according to your Database in your system.
+        
+        Precaution:
+            Even this success test may fail if is there any similar data in your database.
+
+        """
+        searchTerm = 'abcd'
+
+        res = self.client().post('/questions', json={'searchTerm': searchTerm})
+        data = json.loads(res.data)
+        
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(data['total_questions'], 0)
+        self.assertEqual(len(data['questions']), 0)
+
+
 
 # Make the tests conveniently executable
 if __name__ == "__main__":

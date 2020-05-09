@@ -1,17 +1,17 @@
 # Trivia App
 
-## This is the Project 2 built as part of Full Stack Developer Nanodegree Program at Udacity. Full Stack API.
+This project allows you to play a game called <b>Udacitrivia</b>, where you can see/answer a set of questions under 6 categories. You can play a quiz by pressing the Play option.
 
-This project allows you to play a game called <b>Udacitrivia</b>, where there will be a set of questions under 6 categories. You can play a quiz by pressing the Play option.
+#### This is the 2nd project built as part of API Development and Documentation lesson in the Full Stack Developer Nanodegree Program at Udacity.
 
 ### You can do the following in this project
-1) Display questions - both all questions and by category. Questions should show the question, category and difficulty rating by default and can show/hide the answer. 
-2) Delete questions.
-3) Add questions and require that they include question and answer text.
-4) Search for questions based on a text query string.
-5) Play the quiz game, randomizing either all questions or within a specific category. 
+1. <b>Display questions -</b> both all questions and by category. Questions would show the question, category and difficulty rating by default and can show/hide the answer. 
+2. <b>Delete questions.</b>
+3. <b>Add questions</b> and require that they include question and answer text.
+4. <b>Search for questions</b> based on a text query string.
+5. <b>Play the quiz game</b>, randomizing either all questions or within a specific category. 
 
-Completing this trivia app will give you the ability to structure plan, implement, and test an API - skills essential for enabling your future applications to communicate with others. 
+This Trivia App project will give you the ability to structure plan, implement, and test an API - skills essential for enabling your future applications to communicate with others. 
 
 
 ## Get Started
@@ -25,7 +25,7 @@ Completing this trivia app will give you the ability to structure plan, implemen
 
 ### Backend
 
-From the [`./backend/`](./backend/README.md) directory run `pip install -r requirements.txt`. All the required packages are included in this file. To run the application run the following commands.<br>
+From the [`./backend`](./backend/README.md) directory run `pip install -r requirements.txt`. All the required packages are included in this file. To run the application run the following commands.<br>
 <b>For Linux:</b>
 ```bash
 export FLASK_APP=flaskr
@@ -47,25 +47,26 @@ createdb trivia
 ```bash
 create database trivia;
 ```
-Run the following commands from [`./backend/`](./backend/README.md) directory to run the Migration Script to create the required tables:
+Run the following commands from [`./backend`](./backend/README.md) directory to run the Migration Script to create the required tables:
 ```bash
 python -m flask db init
 python -m flask db migrate
 python -m flask db upgrade
 ```
-By default,the backend will run on localhost:5000
+By default, the backend will run on localhost:5000
 
 ### Frontend
 
-The [`./frontend/`](./frontend/README.md) directory contains a complete React frontend to consume the data from the Flask server and from the same directory, run the following commands to start the client:
+The [`./frontend`](./frontend/README.md) directory contains the complete React frontend to consume the data from the Flask server and from the same directory, run the following commands to start the client:
 ```bash
 npm install // only once to install dependencies
 npm start
 ```
-By default,the frontend will run on localhost:3000
+By default, the frontend will run on localhost:3000
 
 ### Tests
-In order to run test navigate to the [`./backend/`](./backend/README.md) directory and run the following commands.<br>
+
+In order to run test, navigate to the [`./backend`](./backend/README.md) directory and, run the following commands.<br>
 <b>For Linux:</b>
 ```bash
 dropdb trivia_test
@@ -80,10 +81,11 @@ create database trivia_test;
 psql trivia_test < trivia.psql -U user_name_of_db
 python test_flaskr.py
 ```
-Don't forget to uncomment the test for the endpoint <b>DELETE '/questions/<int:question_id>'</b> while running your test for the first time and comment it while running the test for other endpoints. It is available at ## TEST 4 ## in [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.
+<b>NOTE:</b>
+Don't forget to uncomment the test for the endpoint <b>DELETE '/questions/<int:question_id>'</b> while running endpoint test for the first time and comment it while running the test for other endpoints. It is available under the comment `## TEST 4 ##` in [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.
 
 
-## API Reference
+# API Reference
 ## Get Started
 <ul>
   <li><b>Base URL:</b> At present this app is not hosted as a base URL anywhere and can only be run locally. By default the backend is hosted at `http://127.0.0.1:5000/` which is set as a proxy in the frontend configuration.</li>
@@ -94,9 +96,9 @@ Don't forget to uncomment the test for the endpoint <b>DELETE '/questions/<int:q
 ### GET '/categories'
 <ul>
   <li><b>Genral:</b></li>
-  <ul>
-  <li>Returns a list of categories, success value and total number of categories</li>
-  </ul>
+    <ul>
+         <li>Returns a list of categories, success value and total number of categories</li>
+    </ul>
   <li><b>Sample:</b> `curl -X GET http://localhost:5000/categories`</li>
 </ul>
     
@@ -136,9 +138,15 @@ Don't forget to uncomment the test for the endpoint <b>DELETE '/questions/<int:q
   "total_categories": 7
 }
 ```
+<b>NOTE:</b>
+If required do add a category with `ID = 0` using SQL command. Since [trivia.sql](https://github.com/kavinraju/Trivia-App/blob/master/backend/trivia.psql) doesn't add a category with `ID=0` there will be some error in the front-end part while rendering the views.
+<b>Command to insert a record:</b>
+```sql
+INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table name
+```
 
 ## Error Handling
-Error are returned as JSON objects in the following format:
+Errors are returned as JSON objects in the following format:
 ```json
 {
   "error": 404, 

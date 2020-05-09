@@ -2,7 +2,9 @@
 
 This project allows you to play a game called <b>Udacitrivia</b>, where you can see/answer a set of questions under 6 categories. You can play a quiz by pressing the Play option.
 
-#### This is the 2nd project built as part of API Development and Documentation lesson in the Full Stack Developer Nanodegree Program at Udacity.
+#### This is the 2nd project built as part of API Development and Documentation lesson in the Full Stack Web Developer Nanodegree Program at Udacity.
+
+All backend code follows [PEP8 style guidelines](https://www.python.org/dev/peps/pep-0008/).
 
 ### You can do the following in this project
 1. <b>Display questions -</b> both all questions and by category. Questions would show the question, category and difficulty rating by default and can show/hide the answer. 
@@ -22,6 +24,14 @@ This Trivia App project will give you the ability to structure plan, implement, 
 2. pip
 3. Node
 4. Flask
+
+### .gitignore file
+
+- Take a look at the [.gitignore file](https://github.com/kavinraju/Trivia-App/blob/master/.gitignore).
+- `keystore.py` file consists of the database password `database_password` used in [models.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/models.py) and [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py).
+- `trivia-project-fsnd` is the `python venv` name for this project. For this project it is used for installing the `backend` packages.
+- `trivia-frontend` is the `python venv` name for the `frontend` application. Packages of the `frontend` application are installed here.
+- You can either choose to have the same `python venv` or different for the `frontend` & `backend` applications.
 
 ### Backend
 
@@ -87,14 +97,13 @@ Don't forget to uncomment the test for the endpoint <b>DELETE `/questions/<int:q
 
 # API Reference
 ## Get Started
-<ul>
-  <li><b>Base URL:</b> At present this app is not hosted as a base URL anywhere and can only be run locally. By default the backend is hosted at http://127.0.0.1:5000/ which is set as a proxy in the frontend configuration.</li>
-  <li><b>Authentication:</b> This version of the application does not require authentication or API keys.</li>
-</ul>
+- <b>Base URL:</b> At present this app is not hosted as a base URL anywhere and can only be run locally. By default the backend is hosted at `http://127.0.0.1:5000/` which is set as a proxy in the frontend configuration.
+- <b>Authentication:</b> This version of the application does not require authentication or API keys.
 
 ## Endpoints
 
 ### GET `/categories`
+   
 <ul>
   <li><b>Genral:</b></li>
     <ul>
@@ -166,6 +175,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
              <li>total number of questions</li>
            </ul>          
          </li>
+      <li>Results are paginated in groups of 10. Include a request argument to choose page number starting from 1, if not mentioned anything, page number defaults to 1.</li>
     </ul>
   <li><b>Sample:</b> `curl -X GET http://localhost:5000/questions`</li>
   <li>Both success `TEST 2` and error `TEST 3` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
@@ -707,6 +717,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
              <li>total number of questions</li>
            </ul>          
          </li>
+         <li>Results are paginated in groups of 10. Include a request argument to choose page number starting from 1, if not mentioned anything, page number defaults to 1.</li>
     </ul>
   <li><b>Sample:</b> `curl -X GET http://localhost:5000/categories/3/questions`</li>
   <li>Both success `TEST 10` and error `TEST 11` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
@@ -759,3 +770,10 @@ This API will return three error types when requests fail:
   <li><b>405</b> Method not found</li>
   <li><b>422</b> Uprocessable Entity</li>
 </ul>
+
+## Authors
+- Kavin Raju S, Completed this project
+- Starter code from Udacity [Full Stack Web Developer Nanodegree program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044).
+
+## Acknowledgements
+The awesome [Udacity](https://udacity.com/) Team!

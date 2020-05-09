@@ -604,11 +604,10 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
     <li><b>Sample:</b></li>
 </ul>
 <b>Resquest Data:</b>
+<p>Before 1st Question:</p>
 ```json
 {
-   "previous_questions":[
-
-   ],
+   "previous_questions":[],
    "quiz_category":{
       "type":{
          "id":2,
@@ -618,13 +617,10 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
    }
 }
 ```
-<b>Responses:</b>
-After 1st Question:<br>
+<p>After 1st Question:</p>
 ```json
 {
-   "previous_questions":[
-      40
-   ],
+   "previous_questions":[40],
    "quiz_category":{
       "type":{
          "id":2,
@@ -634,12 +630,10 @@ After 1st Question:<br>
    }
 }
 ```
-After 2nd Question:
+<p>After 2nd Question:</p>
 ```json
 {
-   "previous_questions":[
-      40, 42
-   ],
+   "previous_questions":[ 40, 42 ],
    "quiz_category":{
       "type":{
          "id":2,
@@ -649,12 +643,10 @@ After 2nd Question:
    }
 }
 ```
-After 3rd Question:
+<p>After 3rd Question:</p>
 ```json
 {
-   "previous_questions":[
-      40, 42, 16
-   ],
+   "previous_questions":[ 40, 42, 16 ],
    "quiz_category":{
       "type":{
          "id":2,
@@ -664,12 +656,10 @@ After 3rd Question:
    }
 }
 ```   
-After 4th Question:
+<p>After 4th Question:</p>
 ```json
 {
-   "previous_questions":[
-      40, 42, 16, 41
-   ],
+   "previous_questions":[ 40, 42, 16, 41 ],
    "quiz_category":{
       "type":{
          "id":2,
@@ -679,12 +669,10 @@ After 4th Question:
    }
 }
 ```
-After 5th Question:
+<p>After 5th Question:</p>
 ```json
 {
-   "previous_questions":[
-      40, 42, 16, 41, 19
-   ],
+   "previous_questions":[ 40, 42, 16, 41, 19 ],
    "quiz_category":{
       "type":{
          "id":2,

@@ -12,7 +12,7 @@ class QuizView extends Component {
         quizCategory: null,
         previousQuestions: [], 
         showAnswer: false,
-        categories: {},
+        categories: [],
         numCorrect: 0,
         currentQuestion: {},
         guess: '',
@@ -26,6 +26,9 @@ class QuizView extends Component {
       type: "GET",
       success: (result) => {
         this.setState({ categories: result.categories })
+        console.log('result');
+        console.log(result);
+        console.log(result.categories);
         return;
       },
       error: (error) => {

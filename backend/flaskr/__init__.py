@@ -252,6 +252,27 @@ def create_app(test_config=None):
   and shown whether they were correct or not. 
   '''
 
+  @app.route('/quizzes', methods=['POST'])
+  def play_quiz():
+    body = request.get_json()
+    print(body)
+
+    if body is None:
+      print('body is none')
+      abort(422) # Unprocessable Entity
+    else:
+      previous_questions = body.get('previous_questions', None)
+      quiz_category = body.get('quiz_category', None)
+
+      questions_of_quiz_category = Category.query.get(quiz_category).questions
+      for question in questions_of_quiz_category:
+        print(question.format(), '\n')
+
+      return jsonify({
+        'success': True,
+        'question': body        
+      })
+
   '''
   @TODO: 
   Create error handlers for all expected errors 

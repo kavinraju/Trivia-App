@@ -6,6 +6,7 @@ import random
 
 from models import setup_db, Question, Category
 
+# Initialization of global variables
 QUESTIONS_PER_PAGE = 10
 ERROR_400_MESSAGE = "Bad request"
 ERROR_404_MESSAGE = "Resource not found"
@@ -83,6 +84,7 @@ def create_app(test_config=None):
   @app.route('/questions', methods=['GET'])
   def retrive_questions():
 
+    # Querying all the questions in the order of their IDs
     selection = Question.query.order_by(Question.id).all()
     current_questions = paginate_questions(request, selection)
 
@@ -112,6 +114,7 @@ def create_app(test_config=None):
   @app.route('/questions/<int:question_id>', methods=['DELETE'])
   def delete_question(question_id):
     try:
+      # Querying for the Question with ID equal to question_id
       question = Question.query.filter(Question.id == question_id).one_or_none()
       
       if question is None:
@@ -122,6 +125,7 @@ def create_app(test_config=None):
       questions_selection = Question.query.order_by(Question.id).all()
       current_questions = paginate_questions(request, questions_selection)
 
+      # Querying for all the categories available
       categories_selection = Category.query.order_by(Category.type).all()
       categories = [category.format() for category in categories_selection]
 
@@ -139,7 +143,7 @@ def create_app(test_config=None):
 
   
   '''
-  @TODO: Done
+  @TODO: DONE
   Create an endpoint to POST a new question, 
   which will require the question and answer text, 
   category, and difficulty score.
@@ -197,7 +201,7 @@ def create_app(test_config=None):
 
 
   '''
-  @TODO: Done
+  @TODO: DONE
   Create a POST endpoint to get questions based on a search term. 
   It should return any questions for whom the search term 
   is a substring of the question. 
@@ -210,7 +214,7 @@ def create_app(test_config=None):
 
 
   '''
-  @TODO: 
+  @TODO: DONE
   Create a GET endpoint to get questions based on category. 
 
   TEST: In the "List" tab / main screen, clicking on one of the 
@@ -241,7 +245,7 @@ def create_app(test_config=None):
       
 
   '''
-  @TODO: 
+  @TODO: DONE
   Create a POST endpoint to get questions to play the quiz. 
   This endpoint should take category and previous question parameters 
   and return a random questions within the given category, 
@@ -325,7 +329,7 @@ def create_app(test_config=None):
       })
 
   '''
-  @TODO: 
+  @TODO: DONE
   Create error handlers for all expected errors 
   including 404 and 422. 
   '''

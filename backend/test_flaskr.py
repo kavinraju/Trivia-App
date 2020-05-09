@@ -9,6 +9,7 @@ from models import setup_db, Question, Category
 """ keystore consists of all the passwords required for the backend """
 from keystore import database_password
 
+# Initialization of global variables
 ERROR_400_MESSAGE = "Bad request"
 ERROR_404_MESSAGE = "Resource not found"
 ERROR_405_MESSAGE = "Method not found"
@@ -49,7 +50,7 @@ class TriviaTestCase(unittest.TestCase):
         pass
 
     """
-    TODO
+    TODO: DONE
     Write at least one test for each test for successful operation and for expected errors.
     """
 
@@ -109,7 +110,6 @@ class TriviaTestCase(unittest.TestCase):
     Don't forget to comment the TEST 4 while running the other tests. It might throw error frequently once
     it has delelte the question with 'question_id'.
     """
-    
     ## TEST 4 ##
     # Success Test
     # def test_delete_question(self):
@@ -174,7 +174,6 @@ class TriviaTestCase(unittest.TestCase):
     """ Test for the endpoint to get questions based on a search term 
     POST '/questions'
     """
-
     ## TEST 8 ##
     # Success Test
     def test_search_question_with_results(self):
@@ -227,7 +226,6 @@ class TriviaTestCase(unittest.TestCase):
     """ Test for the endpoint 
     GET '/categories/<int:category_id>/questions'
     """
-
     ## TEST 10 ##
     # Success Test
     def test_get_paginated_questions_based_on_category(self):

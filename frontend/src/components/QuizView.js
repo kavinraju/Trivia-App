@@ -26,9 +26,6 @@ class QuizView extends Component {
       type: "GET",
       success: (result) => {
         this.setState({ categories: result.categories })
-        console.log('result');
-        console.log(result);
-        console.log(result.categories);
         return;
       },
       error: (error) => {
@@ -49,7 +46,6 @@ class QuizView extends Component {
   getNextQuestion = () => {
     const previousQuestions = [...this.state.previousQuestions]
     if(this.state.currentQuestion.id) { 
-      console.log('previousQuestions: ' + previousQuestions)
       previousQuestions.push(this.state.currentQuestion.id) }
 
     $.ajax({
@@ -66,7 +62,6 @@ class QuizView extends Component {
       },
       crossDomain: true,
       success: (result) => {
-        console.log(result);
         this.setState({
           showAnswer: false,
           previousQuestions: previousQuestions,
@@ -110,7 +105,7 @@ class QuizView extends Component {
           <div className="quiz-play-holder">
               <div className="choose-header">Choose Category</div>
               <div className="category-holder">
-                  <div className="play-category" onClick={this.selectCategory}>ALL</div>
+                  <div className="play-category" onClick={() => this.selectCategory({type: {'type':'ALL'}, id: 0})}>ALL</div>
                   {Object.keys(this.state.categories).map(id => {
                   return (
                     <div
@@ -156,8 +151,6 @@ class QuizView extends Component {
   }
 
   renderPlay(){
-    console.log('this.state.previousQuestions.length ' +this.state.previousQuestions.length);
-    console.log('questionsPerPlay ' + questionsPerPlay);
     return (this.state.previousQuestions.length === questionsPerPlay || this.state.forceEnd)
       ? this.renderFinalScore()
       : this.state.showAnswer 

@@ -38,7 +38,7 @@ set FLASK_APP=flaskr
 set FLASK_ENV=development
 python -m flask run
 ```
-Create a database `trivia` in PostgreSQL using the following commands.<br>
+<br>Create a database `trivia` in PostgreSQL using the following commands.<br>
 <b>For Linux:</b>
 ```bash
 createdb trivia
@@ -53,7 +53,7 @@ python -m flask db init
 python -m flask db migrate
 python -m flask db upgrade
 ```
-By default, the backend will run on localhost:5000
+By default, the backend will run on `localhost:5000`
 
 ### Frontend
 
@@ -62,7 +62,7 @@ The [`./frontend`](./frontend/README.md) directory contains the complete React f
 npm install // only once to install dependencies
 npm start
 ```
-By default, the frontend will run on localhost:3000
+By default, the frontend will run on `localhost:3000`
 
 ### Tests
 
@@ -82,13 +82,13 @@ psql trivia_test < trivia.psql -U user_name_of_db
 python test_flaskr.py
 ```
 <b>NOTE:</b>
-Don't forget to uncomment the test for the endpoint <b>DELETE '/questions/<int:question_id>'</b> while running endpoint test for the first time and comment it while running the test for other endpoints. It is available under the comment `## TEST 4 ##` in [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.
+Don't forget to uncomment the test for the endpoint <b>DELETE `/questions/<int:question_id>`</b> while running endpoint test for the first time and comment it while running the test for other endpoints. It is available under the comment `## TEST 4 ##` in [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.
 
 
 # API Reference
 ## Get Started
 <ul>
-  <li><b>Base URL:</b> At present this app is not hosted as a base URL anywhere and can only be run locally. By default the backend is hosted at `http://127.0.0.1:5000/` which is set as a proxy in the frontend configuration.</li>
+  <li><b>Base URL:</b> At present this app is not hosted as a base URL anywhere and can only be run locally. By default the backend is hosted at http://127.0.0.1:5000/ which is set as a proxy in the frontend configuration.</li>
   <li><b>Authentication:</b> This version of the application does not require authentication or API keys.</li>
 </ul>
 
@@ -106,8 +106,8 @@ Don't forget to uncomment the test for the endpoint <b>DELETE '/questions/<int:q
              </ul>          
          </li>
     </ul>
-  <li><b>Sample:</b> `curl -X GET http://localhost:5000/categories`</li>
-  <li>Success <b>Test</b> `TEST 1` is available at [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.</li>
+  <li><b>Sample:</b> `curl -X GET http://localhost:5000/categories` </li>
+  <li>Success <b>Test</b> `TEST-1` is available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
 ```json
@@ -147,7 +147,7 @@ Don't forget to uncomment the test for the endpoint <b>DELETE '/questions/<int:q
 }
 ```
 <b>NOTE:</b>
-If required do add a category with `ID = 0` using SQL command. Since [trivia.sql](https://github.com/kavinraju/Trivia-App/blob/master/backend/trivia.psql) doesn't add a category with `ID=0` there will be some error in the front-end part while rendering the views.
+If required do add a category with `ID = 0` using SQL command. Since [trivia.sql](https://github.com/kavinraju/Trivia-App/blob/master/backend/trivia.psql) doesn't add a category with `ID = 0` there will be some error in the front-end part while rendering the views.
 <b>Command to insert a record:</b>
 ```sql
 INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table name
@@ -168,7 +168,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
          </li>
     </ul>
   <li><b>Sample:</b> `curl -X GET http://localhost:5000/questions`</li>
-  <li>Both success `TEST 2` and error `TEST 3` <b>Test</b>s are available at [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.</li>
+  <li>Both success `TEST 2` and error `TEST 3` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
 ```json
@@ -297,7 +297,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
          </li>
     </ul>
   <li><b>Sample:</b> `curl -X DELETE http://localhost:5000/questions/5`</li>
-  <li>Both success `TEST 4` and error `TEST 5` <b>Test</b>s are available at [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.</li>
+  <li>Both success `TEST 4` and error `TEST 5` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
 ```json
@@ -426,7 +426,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
          </li>
     </ul>
   <li><b>Sample:</b> `curl -X POST http://localhost:5000/questions -H "Content-Type: application/json" -d "{ \"question\":\"La Giaconda is better known as what?\",\"answer\":\"Mona Lisa\",\"category\":\"2\",\"difficulty\":\"3\"}"`</li>
-  <li>Both success `TEST 6` and error `TEST 7` <b>Test</b>s are available at [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.</li>
+  <li>Both success `TEST 6` and error `TEST 7` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
 ```json
@@ -555,7 +555,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
          </li>
     </ul>
   <li><b>Sample:</b> `curl -X POST http://localhost:5000/questions -H "Content-Type: application/json" -d "{ \"searchTerm\":\"what is\"}"`</li>
-  <li>Both success `TEST 8` and error `TEST 9` <b>Test</b>s are available at [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.</li>
+  <li>Both success `TEST 8` and error `TEST 9` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
    
 </ul>
     
@@ -605,6 +605,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
 </ul>
 <b>Resquest Data:</b>
 <p>Before 1st Question:</p>
+
 ```json
 {
    "previous_questions":[],
@@ -617,7 +618,9 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
    }
 }
 ```
+
 <p>After 1st Question:</p>
+
 ```json
 {
    "previous_questions":[40],
@@ -630,7 +633,9 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
    }
 }
 ```
+
 <p>After 2nd Question:</p>
+
 ```json
 {
    "previous_questions":[ 40, 42 ],
@@ -643,7 +648,9 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
    }
 }
 ```
+
 <p>After 3rd Question:</p>
+
 ```json
 {
    "previous_questions":[ 40, 42, 16 ],
@@ -656,7 +663,9 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
    }
 }
 ```   
+
 <p>After 4th Question:</p>
+
 ```json
 {
    "previous_questions":[ 40, 42, 16, 41 ],
@@ -669,7 +678,9 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
    }
 }
 ```
+
 <p>After 5th Question:</p>
+
 ```json
 {
    "previous_questions":[ 40, 42, 16, 41, 19 ],
@@ -698,7 +709,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
          </li>
     </ul>
   <li><b>Sample:</b> `curl -X GET http://localhost:5000/categories/3/questions`</li>
-  <li>Both success `TEST 10` and error `TEST 11` <b>Test</b>s are available at [test_flaskr.py](https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py) file.</li>
+  <li>Both success `TEST 10` and error `TEST 11` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
 ```json

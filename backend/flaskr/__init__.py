@@ -254,23 +254,74 @@ def create_app(test_config=None):
 
   @app.route('/quizzes', methods=['POST'])
   def play_quiz():
-    body = request.get_json()
-    print(body)
+    body = request.get_json() # Get the body of the request
 
     if body is None:
       print('body is none')
       abort(422) # Unprocessable Entity
     else:
+      # Get the data in the body of the request
       previous_questions = body.get('previous_questions', None)
-      quiz_category = body.get('quiz_category', None)
+      quiz_category_response = body.get('quiz_category', None)
 
-      questions_of_quiz_category = Category.query.get(quiz_category).questions
-      for question in questions_of_quiz_category:
-        print(question.format(), '\n')
+      if quiz_category_response.get('type').get('id') is None:
+        print('quiz_category_response', quiz_category_response)
+        return jsonify({
+        'success': True,
+        'question': None,
+        'previousQuestions': None
+        })
+      else:  
+        # Get the `quiz_category_id`
+        quiz_category_id = quiz_category_response.get('type').get('id')
+
+      # Query the questions in the Category with `quiz_category_id`
+      questions_of_quiz_category = Category.query.get(quiz_category_id).questions
+      formated_questions = paginate_questions(request, questions_of_quiz_category)
+
+      # Initialization
+      question_ids = []
+      random_question_id = 0
+      new_random_question = None
+
+      ## Edge case: If the length of `previous_questions` is equal to the len `formated_questions`
+      # return the response with `question` & `previousQuestions` as None.
+      if len(previous_questions) == len(formated_questions):
+        return jsonify({
+        'success': True,
+        'question': new_random_question,
+        'previousQuestions': None
+        })
+      
+      # Generate a list of questions ids in `question_ids`
+      for question in formated_questions:
+        question_ids.append(question.get('id'))
+
+      if len(previous_questions) == 0:
+        # Generate a random question id from the full list of `question_ids` and append it to the `previous_questions`
+        random_question_id = random.choice(question_ids)
+        previous_questions.append(random_question_id)
+
+        print('random_question_id: ', random_question_id)
+      else:
+        # Eliminate the previous question id's from the full list of `question_ids`
+        for id in previous_questions:
+          if id in question_ids:
+            question_ids.remove(id)
+
+        # Generate a random question id from `question_ids` list
+        random_question_id = random.choice(question_ids)
+        print('random_question_id: ',random_question_id)
+
+      # Looping through `formated_questions` to get the question with id `random_question_id`
+      for question in formated_questions:
+        if question.get('id') == random_question_id:
+          new_random_question = question
 
       return jsonify({
         'success': True,
-        'question': body        
+        'question': new_random_question,
+        'previousQuestions': previous_questions
       })
 
   '''

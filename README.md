@@ -115,7 +115,7 @@ Don't forget to uncomment the test for the endpoint <b>DELETE `/questions/<int:q
              </ul>          
          </li>
     </ul>
-  <li><b>Sample:</b> `curl -X GET http://localhost:5000/categories` </li>
+  <li><b>Sample:</b> curl -X GET http://localhost:5000/categories </li>
   <li>Success <b>Test</b> `TEST-1` is available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
@@ -177,7 +177,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
          </li>
       <li>Results are paginated in groups of 10. Include a request argument to choose page number starting from 1, if not mentioned anything, page number defaults to 1.</li>
     </ul>
-  <li><b>Sample:</b> `curl -X GET http://localhost:5000/questions`</li>
+  <li><b>Sample:</b> curl -X GET http://localhost:5000/questions</li>
   <li>Both success `TEST 2` and error `TEST 3` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
@@ -306,7 +306,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
            </ul>          
          </li>
     </ul>
-  <li><b>Sample:</b> `curl -X DELETE http://localhost:5000/questions/5`</li>
+  <li><b>Sample:</b> curl -X DELETE http://localhost:5000/questions/5</li>
   <li>Both success `TEST 4` and error `TEST 5` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
@@ -435,7 +435,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
            </ul>          
          </li>
     </ul>
-  <li><b>Sample:</b> `curl -X POST http://localhost:5000/questions -H "Content-Type: application/json" -d "{ \"question\":\"La Giaconda is better known as what?\",\"answer\":\"Mona Lisa\",\"category\":\"2\",\"difficulty\":\"3\"}"`</li>
+  <li><b>Sample:</b> curl -X POST http://localhost:5000/questions -H "Content-Type: application/json" -d "{ \"question\":\"La Giaconda is better known as what?\",\"answer\":\"Mona Lisa\",\"category\":\"2\",\"difficulty\":\"3\"}"</li>
   <li>Both success `TEST 6` and error `TEST 7` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     
@@ -564,7 +564,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
            </ul>          
          </li>
     </ul>
-  <li><b>Sample:</b> `curl -X POST http://localhost:5000/questions -H "Content-Type: application/json" -d "{ \"searchTerm\":\"what is\"}"`</li>
+  <li><b>Sample:</b> curl -X POST http://localhost:5000/questions -H "Content-Type: application/json" -d "{ \"searchTerm\":\"what is\"}"</li>
   <li>Both success `TEST 8` and error `TEST 9` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
    
 </ul>
@@ -719,7 +719,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
          </li>
          <li>Results are paginated in groups of 10. Include a request argument to choose page number starting from 1, if not mentioned anything, page number defaults to 1.</li>
     </ul>
-  <li><b>Sample:</b> `curl -X GET http://localhost:5000/categories/3/questions`</li>
+  <li><b>Sample:</b> curl -X GET http://localhost:5000/categories/3/questions</li>
   <li>Both success `TEST 10` and error `TEST 11` <b>Test</b>s are available at <a href="https://github.com/kavinraju/Trivia-App/blob/master/backend/test_flaskr.py">test_flaskr.py</a> file.</li>
 </ul>
     

@@ -606,70 +606,104 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
 `</ul>
 Resquest Data<br>
 ```json
-    {  'previous_questions': [],
-       'quiz_category': {
-                          'type': {'id': 2, 
-                                    'type': 'Art'
-                                  },
-                          'id': '0'
-                        }
+    {
+   "previous_questions":[
+
+   ],
+   "quiz_category":{
+      "type":{
+         "id":2,
+         "type":"Art"
+      },
+      "id":"0"
    }
+}
 ```
 Sample Response:<br>
 After 1st Question:<br>
 ```json
-    {  'previous_questions': [40],
-       'quiz_category': {
-                          'type': {'id': 2, 
-                                    'type': 'Art'
-                                  },
-                          'id': '0'
-                        }
+{
+   "previous_questions":[
+      40
+   ],
+   "quiz_category":{
+      "type":{
+         "id":2,
+         "type":"Art"
+      },
+      "id":"0"
    }
+}
 ```
 After 2nd Question:
 ```json
-    {  'previous_questions': [40, 42],
-       'quiz_category': {
-                          'type': {'id': 2, 
-                                    'type': 'Art'
-                                  },
-                          'id': '0'
-                        }
+{
+   "previous_questions":[
+      40,
+      42
+   ],
+   "quiz_category":{
+      "type":{
+         "id":2,
+         "type":"Art"
+      },
+      "id":"0"
    }
+}
 ```
 After 3rd Question:
 ```json
-    {  'previous_questions': [40, 42, 16],
-       'quiz_category': {
-                          'type': {'id': 2, 
-                                    'type': 'Art'
-                                  },
-                          'id': '0'
-                        }
+{
+   "previous_questions":[
+      40,
+      42,
+      16
+   ],
+   "quiz_category":{
+      "type":{
+         "id":2,
+         "type":"Art"
+      },
+      "id":"0"
    }
+}
 ```   
 After 4th Question:
 ```json
-    {  'previous_questions': [40, 42, 16, 41],
-       'quiz_category': {
-                          'type': {'id': 2, 
-                                    'type': 'Art'
-                                  },
-                          'id': '0'
-                        }
+{
+   "previous_questions":[
+      40,
+      42,
+      16,
+      41
+   ],
+   "quiz_category":{
+      "type":{
+         "id":2,
+         "type":"Art"
+      },
+      "id":"0"
    }
+}
 ```
 After 5th Question:
 ```json
-    {  'previous_questions': [40, 42, 16, 41, 19],
-       'quiz_category': {
-                          'type': {'id': 2, 
-                                    'type': 'Art'
-                                  },
-                          'id': '0'
-                        }
+{
+   "previous_questions":[
+      40,
+      42,
+      16,
+      41,
+      19
+   ],
+   "quiz_category":{
+      "type":{
+         "id":2,
+         "type":"Art"
+      },
+      "id":"0"
    }
+}
 ```
 
 

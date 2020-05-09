@@ -593,7 +593,6 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
              <li>quiz category</li>
            </ul>      
         </li>
-      
          <li>Returns
            <ul>
              <li>previousQuestions</li>
@@ -603,8 +602,8 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
         </li>
     </ul>
     <li><b>Sample:</b></li>
-`</ul>
-Resquest Data<br>
+</ul>
+<b>Resquest Data:</b>
 ```json
     {
    "previous_questions":[
@@ -619,7 +618,7 @@ Resquest Data<br>
    }
 }
 ```
-Sample Response:<br>
+<b>Responses:</b>
 After 1st Question:<br>
 ```json
 {
@@ -639,8 +638,7 @@ After 2nd Question:
 ```json
 {
    "previous_questions":[
-      40,
-      42
+      40, 42
    ],
    "quiz_category":{
       "type":{
@@ -655,9 +653,7 @@ After 3rd Question:
 ```json
 {
    "previous_questions":[
-      40,
-      42,
-      16
+      40, 42, 16
    ],
    "quiz_category":{
       "type":{
@@ -672,10 +668,7 @@ After 4th Question:
 ```json
 {
    "previous_questions":[
-      40,
-      42,
-      16,
-      41
+      40, 42, 16, 41
    ],
    "quiz_category":{
       "type":{
@@ -690,11 +683,7 @@ After 5th Question:
 ```json
 {
    "previous_questions":[
-      40,
-      42,
-      16,
-      41,
-      19
+      40, 42, 16, 41, 19
    ],
    "quiz_category":{
       "type":{

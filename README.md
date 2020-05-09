@@ -605,7 +605,7 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
 </ul>
 <b>Resquest Data:</b>
 ```json
-    {
+{
    "previous_questions":[
 
    ],

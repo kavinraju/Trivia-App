@@ -264,20 +264,20 @@ def create_app(test_config=None):
       previous_questions = body.get('previous_questions', None)
       quiz_category_response = body.get('quiz_category', None)
 
-      if quiz_category_response.get('type').get('id') is None:
+      if quiz_category_response.get('type').get('type') == 'ALL' and quiz_category_response.get('type').get('id') is None:
         print('quiz_category_response', quiz_category_response)
-        return jsonify({
-        'success': True,
-        'question': None,
-        'previousQuestions': None
-        })
+        
+        # Query the questions in all the Categories
+        questions_of_quiz_category = Question.query.order_by(Question.id).all()
+        formated_questions = paginate_questions(request, questions_of_quiz_category)
+
       else:  
         # Get the `quiz_category_id`
         quiz_category_id = quiz_category_response.get('type').get('id')
 
-      # Query the questions in the Category with `quiz_category_id`
-      questions_of_quiz_category = Category.query.get(quiz_category_id).questions
-      formated_questions = paginate_questions(request, questions_of_quiz_category)
+        # Query the questions in the Category with `quiz_category_id`
+        questions_of_quiz_category = Category.query.get(quiz_category_id).questions
+        formated_questions = paginate_questions(request, questions_of_quiz_category)
 
       # Initialization
       question_ids = []

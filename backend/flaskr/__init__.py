@@ -43,9 +43,12 @@ def create_app(test_config=None):
   @app.route('/categories', methods=['GET'])
   def retrive_categories():
 
-    selection = Category.query.order_by(Category.type).all()
-    categories = [category.format() for category in selection]
+    selection = Category.query.all()
+    categories = {}
 
+    for category in selection:
+      categories[category.id] = category.type
+      
     if categories is None or len(categories) == 0:
       abort(404)
     else:
@@ -91,8 +94,11 @@ def create_app(test_config=None):
     if current_questions is None or len(current_questions) == 0:
       abort(404)
     else:
-      categories_selction = Category.query.order_by(Category.type).all()
-      categories = [category.format() for category in categories_selction]
+      categories_selction = Category.query.all()
+      categories = {}
+
+      for category in categories_selction:
+        categories[category.id] = category.type
 
       return jsonify({
         'success': True,
@@ -185,8 +191,11 @@ def create_app(test_config=None):
           questions_selection = Question.query.order_by(Question.id).all()
           current_questions = paginate_questions(request, questions_selection)
 
-          categories_selction = Category.query.order_by(Category.type).all()
-          categories = [category.format() for category in categories_selction]
+          categories_selection = Category.query.all()
+          categories = {}
+
+          for category in categories_selection:
+            categories[category.id] = category.type
 
           return jsonify({
             'success': True,
@@ -261,7 +270,6 @@ def create_app(test_config=None):
     body = request.get_json() # Get the body of the request
 
     if body is None:
-      print('body is none')
       abort(422) # Unprocessable Entity
     else:
       try:
@@ -269,8 +277,8 @@ def create_app(test_config=None):
         previous_questions = body.get('previous_questions', None)
         quiz_category_response = body.get('quiz_category', None)
 
-        if quiz_category_response.get('type').get('type') == 'ALL' and quiz_category_response.get('type').get('id') is None:
-          print('quiz_category_response', quiz_category_response)
+        if quiz_category_response['type'] == 'ALL' and quiz_category_response['id'] == 0:
+          
           
           # Query the questions in all the Categories
           questions_of_quiz_category = Question.query.order_by(Question.id).all()
@@ -278,7 +286,7 @@ def create_app(test_config=None):
 
         else:  
           # Get the `quiz_category_id`
-          quiz_category_id = quiz_category_response.get('type').get('id')
+          quiz_category_id = quiz_category_response['id']
 
           # Query the questions in the Category with `quiz_category_id`
           questions_of_quiz_category = Category.query.get(quiz_category_id).questions
@@ -288,7 +296,7 @@ def create_app(test_config=None):
         question_ids = []
         random_question_id = 0
         new_random_question = None
-
+       
         ## Edge case: If the length of `previous_questions` is equal to the len `formated_questions`
         # return the response with `question` & `previousQuestions` as None.
         if len(previous_questions) == len(formated_questions):
@@ -307,7 +315,6 @@ def create_app(test_config=None):
           random_question_id = random.choice(question_ids)
           previous_questions.append(random_question_id)
 
-          print('random_question_id: ', random_question_id)
         else:
           # Eliminate the previous question id's from the full list of `question_ids`
           for id in previous_questions:
@@ -316,7 +323,6 @@ def create_app(test_config=None):
 
           # Generate a random question id from `question_ids` list
           random_question_id = random.choice(question_ids)
-          print('random_question_id: ',random_question_id)
 
         # Looping through `formated_questions` to get the question with id `random_question_id`
         for question in formated_questions:

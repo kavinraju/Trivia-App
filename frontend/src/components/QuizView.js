@@ -12,7 +12,7 @@ class QuizView extends Component {
         quizCategory: null,
         previousQuestions: [], 
         showAnswer: false,
-        categories: [],
+        categories: {},
         numCorrect: 0,
         currentQuestion: {},
         guess: '',
@@ -35,7 +35,7 @@ class QuizView extends Component {
     })
   }
 
-  selectCategory = ({type, id=0}) => {
+  selectCategory = ({type, id=1}) => {
     this.setState({quizCategory: {type, id}}, this.getNextQuestion)
   }
 
@@ -105,7 +105,7 @@ class QuizView extends Component {
           <div className="quiz-play-holder">
               <div className="choose-header">Choose Category</div>
               <div className="category-holder">
-                  <div className="play-category" onClick={() => this.selectCategory({type: {'type':'ALL'}, id: 0})}>ALL</div>
+                  <div className="play-category" onClick={() => this.selectCategory({type: 'ALL', id: 0})}>ALL</div>
                   {Object.keys(this.state.categories).map(id => {
                   return (
                     <div
@@ -113,7 +113,7 @@ class QuizView extends Component {
                       value={id}
                       className="play-category"
                       onClick={() => this.selectCategory({type:this.state.categories[id], id})}>
-                      {this.state.categories[id].type}
+                      {this.state.categories[id]}
                     </div>
                   )
                 })}

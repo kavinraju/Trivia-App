@@ -121,38 +121,16 @@ Don't forget to uncomment the test for the endpoint <b>DELETE `/questions/<int:q
     
 ```json
 {
-  "categories": [
-    {
-      "id": 2, 
-      "type": "Art"
-    }, 
-    {
-      "id": 5, 
-      "type": "Entertainment"
-    }, 
-    {
-      "id": 3, 
-      "type": "Geography"
-    }, 
-    {
-      "id": 4, 
-      "type": "History"
-    }, 
-    {
-      "id": 1, 
-      "type": "Science"
-    }, 
-    {
-      "id": 6, 
-      "type": "Sports"
-    }, 
-    {
-      "id": 0, 
-      "type": "tech"
-    }
-  ], 
+  "categories": {
+    "1": "Science", 
+    "2": "Art", 
+    "3": "Geography", 
+    "4": "History", 
+    "5": "Entertainment", 
+    "6": "Sports"
+  }, 
   "success": true, 
-  "total_categories": 7
+  "total_categories": 6
 }
 ```
 <b>NOTE:</b>
@@ -183,36 +161,14 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
     
 ```json
 {
-  "categories": [
-    {
-      "id": 2, 
-      "type": "Art"
-    }, 
-    {
-      "id": 5, 
-      "type": "Entertainment"
-    }, 
-    {
-      "id": 3, 
-      "type": "Geography"
-    }, 
-    {
-      "id": 4, 
-      "type": "History"
-    }, 
-    {
-      "id": 1, 
-      "type": "Science"
-    }, 
-    {
-      "id": 6, 
-      "type": "Sports"
-    }, 
-    {
-      "id": 0, 
-      "type": "tech"
-    }
-  ], 
+  "categories": {
+    "1": "Science", 
+    "2": "Art", 
+    "3": "Geography", 
+    "4": "History", 
+    "5": "Entertainment", 
+    "6": "Sports"
+  }, 
   "current_category": null, 
   "questions": [
     {
@@ -312,36 +268,14 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
     
 ```json
 {
-  "categories": [
-    {
-      "id": 2,
-      "type": "Art"
-    },
-    {
-      "id": 5,
-      "type": "Entertainment"
-    },
-    {
-      "id": 3,
-      "type": "Geography"
-    },
-    {
-      "id": 4,
-      "type": "History"
-    },
-    {
-      "id": 1,
-      "type": "Science"
-    },
-    {
-      "id": 6,
-      "type": "Sports"
-    },
-    {
-      "id": 0,
-      "type": "tech"
-    }
-  ],
+  "categories": {
+    "1": "Science", 
+    "2": "Art", 
+    "3": "Geography", 
+    "4": "History", 
+    "5": "Entertainment", 
+    "6": "Sports"
+  }, 
   "current_category": null,
   "deleted": 5,
   "questions": [
@@ -441,36 +375,14 @@ INSERT INTO categories (id, type) VALUES(0, 'tech'); // categories is the table 
     
 ```json
 {
-  "categories": [
-    {
-      "id": 2,
-      "type": "Art"
-    },
-    {
-      "id": 5,
-      "type": "Entertainment"
-    },
-    {
-      "id": 3,
-      "type": "Geography"
-    },
-    {
-      "id": 4,
-      "type": "History"
-    },
-    {
-      "id": 1,
-      "type": "Science"
-    },
-    {
-      "id": 6,
-      "type": "Sports"
-    },
-    {
-      "id": 0,
-      "type": "tech"
-    }
-  ],
+  "categories": {
+    "1": "Science", 
+    "2": "Art", 
+    "3": "Geography", 
+    "4": "History", 
+    "5": "Entertainment", 
+    "6": "Sports"
+  },
   "created": 42,
   "current_category": 2,
   "questions": [

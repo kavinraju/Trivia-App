@@ -50,8 +50,7 @@ class TriviaTestCase(unittest.TestCase):
         pass
 
     """
-    TODO: DONE
-    Write at least one test for each test for successful operation and for expected errors.
+    Written tests for each test for successful operation and for expected errors.
     """
 
     """ Test for the endpoint 

@@ -19,13 +19,12 @@ def create_app(test_config=None):
   setup_db(app)
   
   '''
-  @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
-  DONE
+  Set up CORS. Allowed '*' for origins.
   '''
   cors = CORS(app, resources ={r"/": {"origins":"*"}})
 
   '''
-  @TODO: Use the after_request decorator to set Access-Control-Allow. DONE
+  Used the after_request decorator to set Access-Control-Allow.
   '''
   @app.after_request
   def after_request(response):
@@ -35,11 +34,15 @@ def create_app(test_config=None):
 
 
   '''
-  @TODO: DONE
-  Create an endpoint to handle GET requests 
-  for all available categories.
-  '''
+  GET /categories
 
+  Endpoint to handle GET requests for all available categories.
+
+  Returns:
+      - list of categories
+      - success value
+      - total number of categories
+  '''
   @app.route('/categories', methods=['GET'])
   def retrive_categories():
 
@@ -58,20 +61,6 @@ def create_app(test_config=None):
         'total_categories': len(categories)
       })
 
-
-  '''
-  @TODO: DONE
-  Create an endpoint to handle GET requests for questions, 
-  including pagination (every 10 questions). 
-  This endpoint should return a list of questions, 
-  number of total questions, current category, categories. 
-
-  TEST: At this point, when you start the application
-  you should see questions and categories generated,
-  ten questions per page and pagination at the bottom of the screen for three pages.
-  Clicking on the page numbers should update the questions. 
-  '''
-
   ''' Helper Method for pagination. '''
 
   def paginate_questions(request, selection):
@@ -84,6 +73,18 @@ def create_app(test_config=None):
 
     return current_questions
 
+  '''
+  GET /questions
+
+  Endpoint to handle GET requests for questions, including pagination (every 10 questions). 
+  
+  Returns:
+      - list of categories
+      - current category (always None)
+      - list of questions
+      - success value
+      - total number of questions
+  '''
   @app.route('/questions', methods=['GET'])
   def retrive_questions():
 
@@ -110,13 +111,18 @@ def create_app(test_config=None):
 
   
   '''
-  @TODO: DONE
-  Create an endpoint to DELETE question using a question ID. 
+  DELETE /questions/<int:question_id>
+  
+  Endpoint to DELETE question using a question ID.
 
-  TEST: When you click the trash icon next to a question, the question will be removed.
-  This removal will persist in the database and when you refresh the page. 
+  Returns:
+      - list of categories
+      - current category (always None)
+      - deleted question id
+      - list of questions
+      - success value
+      - total number of questions
   '''
-
   @app.route('/questions/<int:question_id>', methods=['DELETE'])
   def delete_question(question_id):
     try:
@@ -149,16 +155,24 @@ def create_app(test_config=None):
 
   
   '''
-  @TODO: DONE
-  Create an endpoint to POST a new question, 
-  which will require the question and answer text, 
-  category, and difficulty score.
+  POST /questions
 
-  TEST: When you submit a question on the "Add" tab, 
-  the form will clear and the question will appear at the end of the last page
-  of the questions list in the "List" tab.
+  Endpoint to POST a new question. 
+  
+  Requires:
+      - question text
+      - answer text
+      - category
+      - difficulty score.
+
+  Returns:
+      - list of categories
+      - created question id
+      - current category
+      - list of questions
+      - success value
+      - total number of questions
   '''
-
   # Endpoint [POST] to get questions based on a Search Term is also included in the same method -  create_question()
   @app.route('/questions', methods=['POST'])
   def create_question():
@@ -210,27 +224,32 @@ def create_app(test_config=None):
 
 
   '''
-  @TODO: DONE
-  Create a POST endpoint to get questions based on a search term. 
-  It should return any questions for whom the search term 
-  is a substring of the question. 
+  POST /questions
 
-  TEST: Search by any phrase. The questions list will update to include 
-  only question that include that string within their question. 
-  Try using the word "title" to start. 
+  Endpoint to get questions based on a search term ( search term is the substring of the question ).
+
+  Returns:
+      - current category (always None)
+      - list of categories
+      - list of questions
+      - success value
+      - total number of questions
+
+  Refer create_question() method.
   '''
-  # Endpoint [POST] to get questions based on a Search Term is also included in the above method -  create_question()
 
 
   '''
-  @TODO: DONE
-  Create a GET endpoint to get questions based on category. 
+  GET categories/<int:category_id>/questions
 
-  TEST: In the "List" tab / main screen, clicking on one of the 
-  categories in the left column will cause only questions of that 
-  category to be shown. 
-  '''
+  Endpoint to get questions based on category.
   
+  Returns:
+      - current category
+      - list of questions
+      - success value
+      - total number of questions
+  '''
   @app.route('/categories/<int:category_id>/questions', methods=['GET'])
   def get_questions_based_on_category(category_id):
     try:
@@ -254,17 +273,19 @@ def create_app(test_config=None):
       
 
   '''
-  @TODO: DONE
-  Create a POST endpoint to get questions to play the quiz. 
-  This endpoint should take category and previous question parameters 
-  and return a random questions within the given category, 
-  if provided, and that is not one of the previous questions. 
+  POST /quizzes
 
-  TEST: In the "Play" tab, after a user selects "All" or a category,
-  one question at a time is displayed, the user is allowed to answer
-  and shown whether they were correct or not. 
+  Endpoint to get questions to play the quiz.
+
+  Requires:
+      - list of previous question ids, list can be empty while starting the game
+      - quiz category
+
+  Returns:
+      - previousQuestions
+      - a random question (that is not one of the previous questions)
+      - success value
   '''
-
   @app.route('/quizzes', methods=['POST'])
   def play_quiz():
     body = request.get_json() # Get the body of the request
@@ -337,12 +358,9 @@ def create_app(test_config=None):
       except:
         abort(422) # Unprocessable Entity
 
-  '''
-  @TODO: DONE
-  Create error handlers for all expected errors 
-  including 404 and 422. 
-  '''
+  ''' Error handlers for all the expected errors '''
 
+  ''' ERROR 404 '''
   @app.errorhandler(404)
   def resource_not_found(error):
     return jsonify({
@@ -352,6 +370,7 @@ def create_app(test_config=None):
       'error_message': str(error)
     }), 404
 
+  ''' ERROR 422 '''
   @app.errorhandler(422)
   def unprocessable(error):
     return jsonify({
@@ -361,6 +380,7 @@ def create_app(test_config=None):
       'error_message': str(error)
     }), 422
 
+  ''' ERROR 405 '''
   @app.errorhandler(405)
   def method_not_allowed(error):
     return jsonify({

@@ -141,16 +141,12 @@ class QuestionView extends Component {
         <div className="questions-list">
           <h2>Questions</h2>
           {this.state.questions.map((q, ind) => {
-            {console.log('q: ' + q + '\nindex: ' + ind + '\n' +
-            'this.state.categories[q.category]: ' + this.state.categories[q.category] + '\n' +
-            'this.state.categories[q.category][id]: ' + this.state.categories[q.category]['id'] + '\n' +
-            'this.state.categories[q.category][type]: ' + this.state.categories[q.category]['type'] )}
             return(
             <Question
               key={q.id}
               question={q.question}
               answer={q.answer}
-              category={this.state.categories[q.category]['type']} 
+              category={this.state.categories[q.category]} 
               difficulty={q.difficulty}
               questionAction={this.questionAction(q.id)}
             />

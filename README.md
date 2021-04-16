@@ -2,6 +2,7 @@
 
 This project allows you to play a game called <b>Udacitrivia</b>, where you can see/answer a set of questions under 6 categories. You can play a quiz by pressing the Play option.
 
+#### [Check out the API Documentation in GitHub Pages site](https://kavinraju.github.io/Trivia-App/)
 #### This is the 2nd project built as part of API Development and Documentation lesson in the Full Stack Web Developer Nanodegree Program at Udacity.
 
 All backend code follows [PEP8 style guidelines](https://www.python.org/dev/peps/pep-0008/).
